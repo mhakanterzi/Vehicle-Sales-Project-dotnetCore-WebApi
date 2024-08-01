@@ -1,0 +1,22 @@
+# Outputs
+bin/
+obj/
+*.dll
+*.pdb
+*.exe
+*.log
+
+# Project Folders
+*.csproj.user
+*.suo
+*.user
+*.userosscache
+*.suo
+*.cache
+*.gitattributes
+
+# Others
+*.env
+*.db
+*.sqlite
+*.sql
