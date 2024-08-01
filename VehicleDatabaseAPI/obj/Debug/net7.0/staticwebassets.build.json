@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ze17iv9RLfM3xo+Zsgp2jwHb5TaqAJgM7GUIG8Ovh6w=",
+  "Source": "VehicleDatabaseAPI",
+  "BasePath": "_content/VehicleDatabaseAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
