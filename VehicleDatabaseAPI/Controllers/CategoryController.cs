@@ -21,14 +21,14 @@ namespace VehicleDatabaseAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCategories()
         {
-            var categories = await _context.Categories.ToListAsync();
+            var categories = await _context.Category.ToListAsync();
             return Ok(categories);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var category = await _context.Category.FindAsync(id);
             if (category == null)
             {
                 return NotFound();
@@ -37,15 +37,15 @@ namespace VehicleDatabaseAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCategory(Category category)
+        public async Task<IActionResult> PostCategory(Categories category)
         {
-            _context.Categories.Add(category);
+            _context.Category.Add(category);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetCategory), new { id = category.CategoryID }, category);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        public async Task<IActionResult> PutCategory(int id, Categories category)
         {
             if (id != category.CategoryID)
             {
@@ -59,7 +59,7 @@ namespace VehicleDatabaseAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_context.Categories.Any(e => e.CategoryID == id))
+                if (!_context.Category.Any(e => e.CategoryID == id))
                 {
                     return NotFound();
                 }
@@ -74,13 +74,13 @@ namespace VehicleDatabaseAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
-            var category = await _context.Categories.FindAsync(id);
+            var category = await _context.Category.FindAsync(id);
             if (category == null)
             {
                 return NotFound();
             }
 
-            _context.Categories.Remove(category);
+            _context.Category.Remove(category);
             await _context.SaveChangesAsync();
             return NoContent();
         }

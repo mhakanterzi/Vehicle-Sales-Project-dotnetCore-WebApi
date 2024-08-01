@@ -20,7 +20,7 @@ namespace VehicleDatabaseAPI.Controllers
         [HttpGet]
         public IActionResult GetCustomers()
         {
-            var customers = _context.Customers.ToList();
+            var customers = _context.Customer.ToList();
             return Ok(customers);
         }
 
@@ -28,7 +28,7 @@ namespace VehicleDatabaseAPI.Controllers
         [HttpGet("{id}")]
         public IActionResult GetCustomer(int id)
         {
-            var customer = _context.Customers.Find(id);
+            var customer = _context.Customer.Find(id);
             if (customer == null)
             {
                 return NotFound();
@@ -38,16 +38,16 @@ namespace VehicleDatabaseAPI.Controllers
 
         // POST: api/Customer
         [HttpPost]
-        public IActionResult PostCustomer(Customer customer)
+        public IActionResult PostCustomer(Customers customer)
         {
-            _context.Customers.Add(customer);
+            _context.Customer.Add(customer);
             _context.SaveChanges();
             return CreatedAtAction(nameof(GetCustomer), new { id = customer.CustomerID }, customer);
         }
 
         // PUT: api/Customer/5
         [HttpPut("{id}")]
-        public IActionResult PutCustomer(int id, Customer customer)
+        public IActionResult PutCustomer(int id, Customers customer)
         {
             if (id != customer.CustomerID)
             {
@@ -63,13 +63,13 @@ namespace VehicleDatabaseAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteCustomer(int id)
         {
-            var customer = _context.Customers.Find(id);
+            var customer = _context.Customer.Find(id);
             if (customer == null)
             {
                 return NotFound();
             }
 
-            _context.Customers.Remove(customer);
+            _context.Customer.Remove(customer);
             _context.SaveChanges();
             return NoContent();
         }

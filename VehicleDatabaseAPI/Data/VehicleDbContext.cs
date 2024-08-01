@@ -10,8 +10,8 @@ namespace VehicleDatabaseAPI.Data
         {
         }
 
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Customers> Customer { get; set; }
+        public DbSet<Categories> Category { get; set; }
         // Diğer DbSet'leri buraya ekleyin
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

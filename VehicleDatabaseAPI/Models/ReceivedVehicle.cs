@@ -7,8 +7,10 @@
         public decimal ReceivedPrice { get; set; }
         public int CustomerID { get; set; }
         public int VehicleID { get; set; }
+        public string OnSale { get; set; } = "yes";
 
-        public Customer Customer { get; set; }
+
+        public Customers Customer { get; set; }
         public Vehicle Vehicle { get; set; }
     }
 }
