@@ -51,22 +51,8 @@ namespace VehicleDatabaseAPI.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(category).State = EntityState.Modified;
-            try
-            {
-                _context.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_context.Category.Any(e => e.CategoryName == name))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _context.Entry(category).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+             _context.SaveChanges();
             return NoContent();
         }
 

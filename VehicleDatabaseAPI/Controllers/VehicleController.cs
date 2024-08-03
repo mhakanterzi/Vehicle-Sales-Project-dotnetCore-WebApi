@@ -35,16 +35,9 @@ namespace VehicleDatabaseAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostVehicle([FromBody] Vehicle vehicle)
+        public IActionResult PostVehicle( Vehicle vehicle)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            try
-            {
-                // Check if the category exists
                 var category = _context.Category.FirstOrDefault(c => c.CategoryName == vehicle.CategoryName);
                 if (category == null)
                 {
@@ -56,11 +49,7 @@ namespace VehicleDatabaseAPI.Controllers
                 _context.Vehicle.Add(vehicle);
                 _context.SaveChanges();
                 return CreatedAtAction("GetVehicle", new { plate = vehicle.Plate }, vehicle);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Internal server error: {ex.Message}");
-            }
+
         }
 
 

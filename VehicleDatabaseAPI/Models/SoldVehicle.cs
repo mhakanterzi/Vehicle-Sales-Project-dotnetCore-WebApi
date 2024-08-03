@@ -1,13 +1,18 @@
-﻿namespace VehicleDatabaseAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace VehicleDatabaseAPI.Models
 {
     public class SoldVehicle
     {
-        public int SoldVehicleID { get; set; }
-
+        [Required]
         public decimal SoldPrice { get; set; }
+
+        [Required]
         public int CustomerID { get; set; }
-        public int VehicleID { get; set; }
-        public Customer Customer { get; set; }
-        public Vehicle Vehicle { get; set; }
+
+        [Required]
+        public string Plate { get; set; }
+
     }
 }

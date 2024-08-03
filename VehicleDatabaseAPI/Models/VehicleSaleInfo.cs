@@ -14,7 +14,5 @@ namespace VehicleDatabaseAPI.Models
 
         public bool onSale { get; set; }
 
-        [ForeignKey("Plate")]
-        public Vehicle Vehicle { get; set; }
     }
 }
