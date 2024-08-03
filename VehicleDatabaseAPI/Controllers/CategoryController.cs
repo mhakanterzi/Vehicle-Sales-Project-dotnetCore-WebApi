@@ -3,7 +3,6 @@ using VehicleDatabaseAPI.Models;
 using VehicleDatabaseAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace VehicleDatabaseAPI.Controllers
 {
@@ -19,16 +18,16 @@ namespace VehicleDatabaseAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetCategories()
+        public IActionResult GetCategories()
         {
-            var categories = await _context.Category.ToListAsync();
+            var categories = _context.Category.ToList();
             return Ok(categories);
         }
 
         [HttpGet("{name}")]
-        public async Task<IActionResult> GetCategory(string name)
+        public IActionResult GetCategory(string name)
         {
-            var category = await _context.Category.FindAsync(name);
+            var category = _context.Category.FirstOrDefault(c => c.CategoryName == name);
             if (category == null)
             {
                 return NotFound();
@@ -37,15 +36,15 @@ namespace VehicleDatabaseAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCategory(Category category)
+        public IActionResult PostCategory(Category category)
         {
             _context.Category.Add(category);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return CreatedAtAction(nameof(GetCategory), new { name = category.CategoryName }, category);
         }
 
         [HttpPut("{name}")]
-        public async Task<IActionResult> PutCategory(string name, Category category)
+        public IActionResult PutCategory(string name, Category category)
         {
             if (name != category.CategoryName)
             {
@@ -55,7 +54,7 @@ namespace VehicleDatabaseAPI.Controllers
             _context.Entry(category).State = EntityState.Modified;
             try
             {
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,16 +71,16 @@ namespace VehicleDatabaseAPI.Controllers
         }
 
         [HttpDelete("{name}")]
-        public async Task<IActionResult> DeleteCategory(string name)
+        public IActionResult DeleteCategory(string name)
         {
-            var category = await _context.Category.FindAsync(name);
+            var category = _context.Category.FirstOrDefault(c => c.CategoryName == name);
             if (category == null)
             {
                 return NotFound();
             }
 
             _context.Category.Remove(category);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return NoContent();
         }
     }
