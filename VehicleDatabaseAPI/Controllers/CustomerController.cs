@@ -38,7 +38,7 @@ namespace VehicleDatabaseAPI.Controllers
 
         // POST: api/Customer
         [HttpPost]
-        public IActionResult PostCustomer(Customers customer)
+        public IActionResult PostCustomer(Customer customer)
         {
             _context.Customer.Add(customer);
             _context.SaveChanges();
@@ -47,7 +47,7 @@ namespace VehicleDatabaseAPI.Controllers
 
         // PUT: api/Customer/5
         [HttpPut("{id}")]
-        public IActionResult PutCustomer(int id, Customers customer)
+        public IActionResult PutCustomer(int id, Customer customer)
         {
             if (id != customer.CustomerID)
             {

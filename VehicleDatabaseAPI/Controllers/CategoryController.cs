@@ -25,10 +25,10 @@ namespace VehicleDatabaseAPI.Controllers
             return Ok(categories);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetCategory(int id)
+        [HttpGet("{name}")]
+        public async Task<IActionResult> GetCategory(string name)
         {
-            var category = await _context.Category.FindAsync(id);
+            var category = await _context.Category.FindAsync(name);
             if (category == null)
             {
                 return NotFound();
@@ -37,17 +37,17 @@ namespace VehicleDatabaseAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostCategory(Categories category)
+        public async Task<IActionResult> PostCategory(Category category)
         {
             _context.Category.Add(category);
             await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetCategory), new { id = category.CategoryID }, category);
+            return CreatedAtAction(nameof(GetCategory), new { name = category.CategoryName }, category);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Categories category)
+        [HttpPut("{name}")]
+        public async Task<IActionResult> PutCategory(string name, Category category)
         {
-            if (id != category.CategoryID)
+            if (name != category.CategoryName)
             {
                 return BadRequest();
             }
@@ -59,7 +59,7 @@ namespace VehicleDatabaseAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_context.Category.Any(e => e.CategoryID == id))
+                if (!_context.Category.Any(e => e.CategoryName == name))
                 {
                     return NotFound();
                 }
@@ -71,10 +71,10 @@ namespace VehicleDatabaseAPI.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCategory(int id)
+        [HttpDelete("{name}")]
+        public async Task<IActionResult> DeleteCategory(string name)
         {
-            var category = await _context.Category.FindAsync(id);
+            var category = await _context.Category.FindAsync(name);
             if (category == null)
             {
                 return NotFound();

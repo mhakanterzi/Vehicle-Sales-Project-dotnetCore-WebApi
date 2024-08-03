@@ -10,7 +10,7 @@
         public string OnSale { get; set; } = "yes";
 
 
-        public Customers Customer { get; set; }
+        public Customer Customer { get; set; }
         public Vehicle Vehicle { get; set; }
     }
 }
