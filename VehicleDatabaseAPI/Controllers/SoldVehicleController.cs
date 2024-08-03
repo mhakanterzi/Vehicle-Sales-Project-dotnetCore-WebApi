@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using VehicleDatabaseAPI.Models;
 using VehicleDatabaseAPI.Data;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace VehicleDatabaseAPI.Controllers
 {
-    [Route("api/controller")]
+    [Route("api/soldvehicles")]
     [ApiController]
     public class SoldVehicleController : ControllerBase
     {
@@ -20,18 +21,23 @@ namespace VehicleDatabaseAPI.Controllers
         [HttpGet]
         public IActionResult GetSolds()
         {
-            var solds = _context.SoldVehicle.ToList();
+            var solds = _context.SoldVehicle.Include(s => s.CustomerID).Include(s => s.Plate).ToList();
             return Ok(solds);
         }
 
         [HttpGet("{plate}")]
         public IActionResult GetSold(string plate)
         {
-            var sold = _context.SoldVehicle.FirstOrDefault(s => s.Plate == plate);
-            if(plate== null)
+            var sold = _context.SoldVehicle
+                .Include(s => s.CustomerID)
+                .Include(s => s.Plate)
+                .FirstOrDefault(s => s.Plate == plate);
+
+            if (sold == null)
             {
                 return NotFound();
             }
+
             return Ok(sold);
         }
 
@@ -46,27 +52,39 @@ namespace VehicleDatabaseAPI.Controllers
         [HttpPut("{plate}")]
         public IActionResult PutSold(string plate, SoldVehicle sold)
         {
-            if(plate != sold.Plate)
+            if (plate != sold.Plate)
+            {
+                return BadRequest();
+            }
+
+            var existingSold = _context.SoldVehicle.Find(sold.Plate);
+            if (existingSold == null)
             {
                 return NotFound();
             }
-            _context.Entry(sold).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+            existingSold.SoldPrice = sold.SoldPrice;
+            existingSold.CustomerID = sold.CustomerID;
+
+            _context.Entry(existingSold).State = EntityState.Modified;
             _context.SaveChanges();
+
             return NoContent();
         }
 
-        [HttpDelete("{Plate}")]
-        public IActionResult DeleteSold ( string plate)
+        [HttpDelete("{plate}")]
+        public IActionResult DeleteSold(string plate)
         {
             var sold = _context.SoldVehicle.FirstOrDefault(s => s.Plate == plate);
-            if(sold == null)
+            if (sold == null)
             {
                 return NotFound();
             }
+
             _context.SoldVehicle.Remove(sold);
             _context.SaveChanges();
+
             return NoContent();
         }
-
     }
 }

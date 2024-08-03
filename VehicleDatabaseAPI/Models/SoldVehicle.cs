@@ -5,14 +5,13 @@ namespace VehicleDatabaseAPI.Models
 {
     public class SoldVehicle
     {
-        [Required]
+        [Key]
         public decimal SoldPrice { get; set; }
 
-        [Required]
+        [ForeignKey("Customer")]
         public int CustomerID { get; set; }
 
-        [Required]
+        [ForeignKey("Vehicle")]
         public string Plate { get; set; }
-
     }
 }
