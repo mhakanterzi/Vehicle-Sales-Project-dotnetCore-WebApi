@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2R9f1jJB4XugfQLmSGeOk0R2kwAxlNY8rBVIhnSUJ7l+B2jIO/X38PmjUIAKzMOBZh0xsL0bDD1VzCIo1Y9RCg==",
+  "dgSpecHash": "Q0tahef71iDe8Nw1T0ATmrB8dNjHihoaAHmzYnzK7SeWyRJU4bbqw8t7o6iOTe8a7pn/6oMu5U4H00fbB/5eVA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\Vehicle-Sales-App-.NetCore\\VehicleDatabaseAPI\\VehicleDatabaseAPI\\VehicleDatabaseAPI.csproj",
+  "projectFilePath": "C:\\Users\\lenovo\\OneDrive\\Desktop\\Staj\\Vehicle-Sales-Project-dotnetCore-WebApi\\VehicleDatabaseAPI\\VehicleDatabaseAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\lenovo\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\lenovo\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

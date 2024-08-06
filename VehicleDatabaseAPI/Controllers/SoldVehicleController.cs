@@ -74,8 +74,7 @@ namespace VehicleDatabaseAPI.Controllers
 
         [HttpDelete("{plate}")]
         public IActionResult DeleteSold(string plate)
-        {
-            var sold = _context.SoldVehicle.FirstOrDefault(s => s.Plate == plate);
+        {            var sold = _context.SoldVehicle.FirstOrDefault(s => s.Plate == plate);
             if (sold == null)
             {
                 return NotFound();
